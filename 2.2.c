@@ -34,7 +34,7 @@ double getSquare(const double side1, const double side2);
  * @brief Точка входа в программу
  * @return возвращает 0, если программма выполнена корректно
  */
- enum {PERIMETR=253, SQUARE};
+ enum {PERIMETR, SQUARE};
 int main(void)
 {
     printf("Введите стороны прямоугольника: ");
