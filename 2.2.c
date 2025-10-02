@@ -31,10 +31,15 @@ void checkValue(const double value);
 double getSquare(const double side1, const double side2);
 
 /**
+@brief PERIMETR - периметр прямоугольника
+@brief SQUARE - площадь прямоугольника
+*/
+enum {PERIMETR, SQUARE};
+
+/**
  * @brief Точка входа в программу
  * @return возвращает 0, если программма выполнена корректно
  */
- enum {PERIMETR, SQUARE};
 int main(void)
 {
     printf("Введите стороны прямоугольника: ");
@@ -54,6 +59,7 @@ int main(void)
         break;
     default:
         printf("Неправильный выбор");
+        abort();
     }
 
     return 0;
