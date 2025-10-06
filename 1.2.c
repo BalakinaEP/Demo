@@ -13,7 +13,7 @@ double getPerimetr(const double side);
  */
 int main(void)
 {
-    double side;
+    double side = 0;
     scanf("%lf",&side);
     printf("Сторона равна %.2lf\n", side);
     printf("Периметр равен %.2lf",getPerimetr(side));
