@@ -8,7 +8,7 @@
  */
 int Value();
 
-size_t getSize();
+size_t getSize(char* message);
 
 void fillArray(int* arr, const size_t size);
 void printArray(int* arr, const size_t size);
@@ -23,8 +23,7 @@ enum {RANDOM = 1, MANUAL};
 
 int main()
 {
-    printf("Введите размер массива:  ");
-    size_t size = getSize();
+    size_t size = getSize("Введите размер массива:  ");
     int* arr = malloc(size * sizeof(int));
     if (arr == NULL)
     {
@@ -55,7 +54,7 @@ int main()
     int* copyArr = copyArray(arr,size);
     replaceEvenElements(copyArr, size);
     printArray(copyArr,size);
-    free(copyArray);
+    free(copyArr);
     free(arr);
     return 0;
 }
@@ -71,8 +70,9 @@ int Value()
     return value;
 }
 
-size_t getSize()
+size_t getSize(char* message)
 {
+    printf("%s", message);
     int value = Value();
     if (value <= 0)
     {
@@ -97,6 +97,7 @@ void printArray(int* arr, const size_t size)
     {
         printf("%d ", arr[i]);
     }
+    printf("/n ");
 }
 
 int sumArray(int* arr, const size_t size)
@@ -168,4 +169,5 @@ void replaceEvenElements(int* copyArr, const size_t size)
         {
             copyArr[i]*=-1;
         }
+    }
 }
