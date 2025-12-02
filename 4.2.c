@@ -7,18 +7,18 @@
  * @return Введенное значение
  */
 int Value();
-
 size_t getSize(char* message);
-
 void fillArray(int** arr, const size_t rows,const size_t columns);
 void printArray(int** arr, const size_t rows,const size_t columns);
 int sumArray(int** arr, const size_t rows, const size_t columns, const size_t row);
 void fillRandom(int** arr, const size_t rows,const size_t columns);
 int** getArray(const size_t rows, const size_t columns);
-
 void checkRange(const int start, const int end);
 void chekrow(const size_t row, const size_t rows);
 int** freeArray(int** arr, const size_t rows);
+void deleteRowsEvenSum(int** arr, const size_t rows, const size_t columns,int** newarr);
+int getCountEvenSumElemOfRows(int** arr, const size_t rows, const size_t columns );
+
 
 
 enum {RANDOM = 1, MANUAL};
@@ -51,6 +51,11 @@ int main()
     size_t row = getSize("Введите номер строки для поиска суммы элементов:") - 1;
     chekrow(row, rows);
     printf("Cумма элементов в  строке %d равна %d\n",row + 1,sumArray(arr, rows, columns, row));
+    size_t newrows = rows - getCountEvenSumElemOfRows(arr, rows, columns);
+    int** newarr = getArray(newrows,columns);
+    deleteRowsEvenSum(arr, rows, columns, newarr);
+    printArray(newarr,newrows,columns);
+    freeArray(newarr, newrows);
     freeArray(arr, rows);
     return 0;
 }
@@ -167,5 +172,45 @@ void chekrow(const size_t row, const size_t rows)
     {
         printf("Error\n");
         exit(1);
+    }
+}
+
+int getCountEvenSumElemOfRows(int** arr, const size_t rows, const size_t columns )
+{
+    int count = 0;
+    for ( size_t i =0; i<rows;i++)
+    {
+        int sum = 0;
+        for ( size_t j =0; j<columns;j++)
+        {
+            sum += arr[i][j];
+        }
+        if (sum % 2 == 0)
+            {
+                count++;
+            }
+    }
+    return count;
+    
+}
+
+void deleteRowsEvenSum(int** arr, const size_t rows, const size_t columns,int** newarr)
+{
+    size_t myi = 0;
+    for ( size_t i =0; i<rows;i++)
+    {
+        int sum = 0;
+        for ( size_t j =0; j<columns;j++)
+        {
+            sum += arr[i][j];
+        }
+        if (sum % 2 != 0)
+            {
+               for ( size_t j =0; j<columns;j++)
+               {
+                   newarr[myi][j]=arr[i][j];
+               }
+               myi++;
+            }
     }
 }
